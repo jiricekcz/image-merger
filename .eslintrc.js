@@ -21,5 +21,12 @@ module.exports = {
         "eslint-comments/no-aggregating-enable": "error",
         "eslint-comments/no-duplicate-disable": "error",
         "eslint-comments/no-unlimited-disable": "error",
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+        }
     }
 };
