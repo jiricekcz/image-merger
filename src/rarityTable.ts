@@ -11,7 +11,7 @@ export class RarityTable<T extends string = string> {
         if (this.traits.has(trait)) throw new Error(`Trait ${trait} is already declared in the rarity table.`);
         this.traits.set(trait, new Trait(options));
     }
-    public randomTokenTraits(order: Array<T>): TokenTraits<T> {
+    public randomTokenTraits(order: Array<T> = this.TRAITS): TokenTraits<T> {
         const traits: TokenTraits<T> = new TokenTraits(order);
         for (const trait of this.TRAIT_VALUES) {
             const t = this.traits.get(trait);
