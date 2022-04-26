@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+import path from "path";
 export class MetadataBuilder {
     public readonly tokens: Array<Token> = [];
     public readonly description: string;
@@ -50,6 +51,13 @@ export class MetadataBuilder {
                 content: JSON.stringify(token),
             };
         }
+    }
+    public async save(filepath: string): Promise<void> {
+        const ps: Array<Promise<void>> = [];
+        for (const { name, content } of this.metadata()) {
+            ps.push(fs.writeFile(path.join(filepath, name), content));
+        }
+        await Promise.all(ps);
     }
 }
 
