@@ -125,7 +125,7 @@ export class Token {
     }
     public getName(): string {
         if (this.name) return this.name;
-        return `${this.builder.name} #${this.getTokenID().toString()}`;
+        return `${this.builder.name} #${(this.getTokenID() + 1).toString()}`;
     }
     public getTokenID(): number {
         return this.tokenID;
