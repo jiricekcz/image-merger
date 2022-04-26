@@ -1,8 +1,10 @@
 export class RarityTable<T extends string = string> {
     public readonly TRAIT_VALUES: Set<T>;
+    public readonly TRAITS: Array<T>;
     public readonly traits: Map<T, Trait> = new Map<T, Trait>();
-    constructor(traits: Array<T>) {
+    constructor(traits: Array<T>, traitsOrder: Array<T> = traits) {
         this.TRAIT_VALUES = new Set(traits);
+        this.TRAITS = traitsOrder;
     }
     public declareTrait<R extends T, O extends string>(trait: R, options: TraitOptions<O>): void {
         if (!this.TRAIT_VALUES.has(trait)) throw new Error(`Trait ${trait} is not declared in the rarity table.`);
