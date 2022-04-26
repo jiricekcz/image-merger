@@ -9,7 +9,6 @@ export function parseExcel<T extends string = string>(
     const file = XLSX.readFile(path);
     const sheetnames = file.SheetNames.filter((v) => !v.startsWith("A-"));
     const declarationSheet = new DeclarationSheet(file.Sheets["A-Declarations"]);
-    console.log(declarationSheet.invalidTraitOptions);
 
     if (!sheetname)
         if (sheetnames.length > 1) {
@@ -91,7 +90,6 @@ function findTrait<T extends string>(
         rv.push({ name: cell.v.trim(), value: getValueFromValueCell(sheet, right(it)) });
         it = under(it);
     }
-    console.log(rv);
     return rv;
 }
 
