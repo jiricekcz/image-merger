@@ -246,7 +246,7 @@ interface TokenOptions {
     externalUrl?: string;
     externalUrlExtension?: string;
 }
-interface MetadataBuilderOptions {
+export interface MetadataBuilderOptions {
     backgroundColor?: string;
     youtubeUrl?: string;
 
@@ -259,7 +259,7 @@ interface MetadataBuilderOptions {
     baseExternalUrl?: string;
     baseExternalUrlExtention?: string;
 }
-interface TokenMetadata {
+export interface TokenMetadata {
     description: string;
     tokenID: number;
     name: string;
@@ -270,13 +270,13 @@ interface TokenMetadata {
     youtube_url?: string;
     attributes: TokenAttributes;
 }
-interface UnnamedAttribute {
+export interface UnnamedAttribute {
     value: string;
 }
 /**
  * Generic trait.
  */
-interface BaseAttribute<N extends string | number = string | number> {
+export interface BaseAttribute<N extends string | number = string | number> {
     trait_type: string;
     value: N;
 }
@@ -284,39 +284,39 @@ interface BaseAttribute<N extends string | number = string | number> {
  * Generic numeric trait.
  * Displayed as a bar. Max value defines full bar value.
  */
-interface NumericAttribute extends BaseAttribute<number> {
+export interface NumericAttribute extends BaseAttribute<number> {
     max_value: number;
 }
 /**
  * A numeric trait displayed in a circle
  */
-interface CircleNumericAttribute extends NumericAttribute {
+export interface CircleNumericAttribute extends NumericAttribute {
     display_type: "number";
 }
 /**
  * A numeric trait displayed as circle progress bar. Max value defines full bar value.
  */
-interface BoostNumericAttribute extends NumericAttribute {
+export interface BoostNumericAttribute extends NumericAttribute {
     display_type: "boost_number";
 }
 /**
  * A numeric trait displayed as a circle progress bar. Max value defines full bar value. Value is in percent.
  */
-interface BoostPercentageAttribute extends NumericAttribute {
+export interface BoostPercentageAttribute extends NumericAttribute {
     display_type: "boost_percentage";
 }
 /**
  * A date trait. Value is a unix timestamp in seconds.
  */
-interface DateAttribure extends BaseAttribute<number> {
+export interface DateAttribure extends BaseAttribute<number> {
     display_type: "date";
 }
-type NamedAttribute =
+export type NamedAttribute =
     | NumericAttribute
     | CircleNumericAttribute
     | BoostNumericAttribute
     | BoostPercentageAttribute
     | DateAttribure;
-type TokenAttribute = UnnamedAttribute | NamedAttribute;
+export type TokenAttribute = UnnamedAttribute | NamedAttribute;
 
-type TokenAttributes = Array<TokenAttribute>;
+export type TokenAttributes = Array<TokenAttribute>;
