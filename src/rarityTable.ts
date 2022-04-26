@@ -53,10 +53,23 @@ export class TokenTraits<T extends string = string> extends Map<T, string> {
         }
         return rv;
     }
+    toAttributesArray(): Array<Attribute> {
+        const rv: Array<Attribute> = [];
+        for (const trait of this.ALL_TRAITS) {
+            const value = this.get(trait);
+            if (!value) continue;
+            rv.push({trait_type: trait, value});
+        }
+        return rv;
+    }
 
 }
 export interface Layer {
     readonly name: string;
+    readonly value: string;
+}
+export interface Attribute {
+    readonly trait_type: string;
     readonly value: string;
 }
 export interface Option<T extends string = string> {
