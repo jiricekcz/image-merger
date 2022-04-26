@@ -53,10 +53,9 @@ export class LayerMerger<T extends string = string> {
                 `Option ${(layers[0] as LayerConfig).value} is not valid for layer ${(layers[0] as LayerConfig).name}`
             );
         const layerValue = layer.getPath((layers[0] as LayerConfig).value);
-        const img: sharp.Sharp = sharp(layerValue);; // eslint-disable-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-        
-
-        for (let i = 0; i < layers.length; i++) {
+        const img: sharp.Sharp = sharp(layerValue); // eslint-disable-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+        const ar: { input: string; gravity: sharp.Gravity }[] = [];
+        for (let i = 1; i < layers.length; i++) {
             const l = layers[i] as LayerConfig;
 
             if (!this.validateLayer(l.name)) throw new Error(`Missing layer ${l.name}`);
@@ -64,10 +63,9 @@ export class LayerMerger<T extends string = string> {
             if (!layer.validateName(l.value))
                 throw new Error(`Option ${l.value as string} is not valid for layer ${l.name}`);
             const layerValue = layer.getPath(l.value);
-            console.log([{ input: layerValue }]);
-            img.composite([{ input: layerValue, gravity: gravity }]); // eslint-disable-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+            ar.push({ input: layerValue, gravity: gravity }); // eslint-disable-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         }
-        return img;
+        return img.composite(ar); // eslint-disable-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     }
 }
 
