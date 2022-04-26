@@ -11,12 +11,12 @@ export class RarityTable<T extends string = string> {
         if (this.traits.has(trait)) throw new Error(`Trait ${trait} is already declared in the rarity table.`);
         this.traits.set(trait, new Trait(options));
     }
-    public randomTokenTraits(order: Array<T> = this.TRAITS): TokenTraits<T> {
+    public randomTokenTraits(random: () => number = Math.random, order: Array<T> = this.TRAITS): TokenTraits<T> {
         const traits: TokenTraits<T> = new TokenTraits(order);
         for (const trait of this.TRAIT_VALUES) {
             const t = this.traits.get(trait);
             if (!t) throw new Error(`Missing trait ${trait}`);
-            traits.set(trait, t.randomOption().name);
+            traits.set(trait, t.randomOption(random).name);
         }
         return traits;
     }
