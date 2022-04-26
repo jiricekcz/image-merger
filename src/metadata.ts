@@ -162,6 +162,7 @@ export class Token {
         let ext: string;
         if (this.externalUrlExtension) ext = this.externalUrlExtension;
         else if (this.builder.baseExternalUrlExtention) ext = this.builder.baseExternalUrlExtention;
+        else if (this.builder.baseExternalUrl) return this.builder.baseExternalUrl;
         else return undefined;
 
         if (!this.builder.baseExternalUrl) return undefined;
